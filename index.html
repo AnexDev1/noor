@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noor - Your Premium Islamic Companion</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0F4C3A;
+            --primary-light: #1B5E4B;
+            --primary-dark: #083426;
+            --accent: #D4AF37;
+            --accent-light: #F1C232;
+            --secondary: #2D5A87;
+            --background: #0A0E1A;
+            --surface: #131827;
+            --surface-light: #1F2937;
+            --text-primary: #FFFFFF;
+            --text-secondary: #D1D5DB;
+            --text-tertiary: #9CA3AF;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--surface);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            border-radius: 10px;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #0A0E1A 0%, #1B1F3A 25%, #2D1B69 50%, #0F4C3A 75%, #0A0E1A 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 15px 30px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            overflow: hidden;
+        }
+
+        .logo-icon img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px 0 40px;
+            width: 100%;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: slideInLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--accent);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #FFFFFF, var(--accent), #FFFFFF);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.7;
+            max-width: 90%;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .btn {
+            padding: 18px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: var(--background);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+        }
+
+        /* Hero Phone */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            animation: slideInRight 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .phone-container {
+            position: relative;
+            transform-style: preserve-3d;
+            animation: floatPhone 6s ease-in-out infinite;
+        }
+
+        @keyframes floatPhone {
+            0%, 100% { transform: translateY(0px) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateY(5deg); }
+        }
+
+        .phone-mockup {
+            width: 280px;
+            height: 560px;
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border-radius: 40px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .phone-mockup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+            border-radius: 40px;
+            pointer-events: none;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 30px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: all 0.6s;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: var(--background);
+            animation: iconFloat 3s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        .feature-icon img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Splash Screen Animations */
+        @keyframes logoScale {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(212, 175, 55, 0.6); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Enhanced Stats Section */
+        .stats-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(15, 76, 58, 0.1));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23D4AF37" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: all 0.4s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Download Section */
+        .download-section {
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .download-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            animation: rotate 8s linear infinite;
+            pointer-events: none;
+        }
+
+        .download-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .download-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .download-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 25px 50px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: var(--background);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.6s;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.6);
+        }
+
+        .download-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .download-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .download-feature i {
+            color: var(--accent);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--surface), var(--surface-light));
+            padding: 80px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-tertiary);
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+                text-align: center;
+            }
+            .hero-title {
+                font-size: 3rem;
+            }
+            .navbar {
+                left: 20px;
+                right: 20px;
+                transform: none;
+            }
+            .hero-visual img {
+                width: 350px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero-stats {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .hero-visual img {
+                width: 200px !important;
+            }
+            .nav-links {
+                display: none;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .download-container {
+                margin: 0 20px;
+                padding: 40px 30px;
+            }
+        }
+
+        /* Custom cursor effect */
+        .cursor-effect {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, var(--accent), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        /* Scroll animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Custom Cursor -->
+    <div class="cursor-effect" id="cursor"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="icon.png" alt="Noor">
+                </div>
+                <span>Noor</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#download" class="nav-link">Download</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <i class="fas fa-star"></i>
+                        <span>Premium Islamic Companion</span>
+                    </div>
+                    <h1 class="hero-title">Transform Your Islamic Journey</h1>
+                    <p class="hero-subtitle">
+                        Experience the most beautiful and comprehensive Islamic app ever created. With AI-powered guidance, stunning visuals, and authentic Islamic content - Noor brings spirituality to the digital age.
+                    </p>
+                    <div class="cta-group">
+                        <a href="#download" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Download Now
+                        </a>
+                        <a href="#features" class="btn btn-secondary">
+                            <i class="fas fa-play"></i>
+                            Watch Demo
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">50K+</span>
+                            <span class="stat-label">Downloads</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">4.9★</span>
+                            <span class="stat-label">Rating</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100+</span>
+                            <span class="stat-label">Countries</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <img src="mockup.png" alt="Noor App Mockup" style="width:550px;max-width:100%;border-radius:40px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Exceptional Features</h2>
+                <p class="section-subtitle">
+                    Discover a comprehensive suite of Islamic tools designed with modern technology and authentic teachings
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <img src="prayer.png" alt="Prayer Times">
+                    </div>
+                    <h3 class="feature-title">Smart Prayer Times</h3>
+                    <p class="feature-description">
+                        Ultra-precise prayer calculations with beautiful notifications, weather integration, and customizable reminders that adapt to your location automatically.
+                    </p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <img src="quran.png" alt="Quran">
+                    </div>
+                    <h3 class="feature-title">Complete Quran</h3>
+                    <p class="feature-description">
+                        Experience the Holy Quran with stunning typography, multiple translations, tajweed rules, and professional recitations from world-renowned Qaris.
+                    </p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="feature-title">Authentic Hadith</h3>
+                    <p class="feature-description">
+                        Access thousands of verified Hadiths from Sahih Bukhari, Muslim, and other authentic collections with advanced search and categorization.
+                    </p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <img src="tasbih.png" alt="Digital Tasbih">
+                    </div>
+                    <h3 class="feature-title">Digital Tasbih</h3>
+                    <p class="feature-description">
+                        Elegant counter with haptic feedback, progress tracking, and customizable dhikr collections to enhance your remembrance of Allah.
+                    </p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands"></i>
+                    </div>
+                    <h3 class="feature-title">Daily Azkhar</h3>
+                    <p class="feature-description">
+                        Morning, evening, and situational supplications with audio guides, progress tracking, and personalized reminders for consistent practice.
+                    </p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <img src="chat.png" alt="AI Islamic Guide">
+                    </div>
+                    <h3 class="feature-title">AI Islamic Guide</h3>
+                    <p class="feature-description">
+                        Get authentic Islamic guidance through our advanced AI trained on classical Islamic texts and verified by scholars.
+                    </p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <img src="masjid.png" alt="Qibla Compass">
+                    </div>
+                    <h3 class="feature-title">Qibla Compass</h3>
+                    <p class="feature-description">
+                        Ultra-accurate Qibla direction with 3D compass visualization and augmented reality features for precise alignment.
+                    </p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3 class="feature-title">Islamic Calendar</h3>
+                    <p class="feature-description">
+                        Complete Hijri calendar with important Islamic dates, moon phases, and personalized event reminders for significant occasions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section reveal">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number" data-count="50000">0</span>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-count="120">0</span>
+                    <div class="stat-label">Countries</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-count="2500000">0</span>
+                    <div class="stat-label">Prayers Tracked</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">4.9</span>
+                    <div class="stat-label">App Store Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download-section" id="download">
+        <div class="container">
+            <div class="download-container reveal">
+                <div class="download-content">
+                    <h2 class="download-title">Ready to Transform Your Islamic Journey?</h2>
+                    <p class="download-subtitle">
+                        Join thousands of Muslims worldwide who have made Noor their trusted Islamic companion. Download now and experience the future of Islamic apps.
+                    </p>
+                    <a href="#" class="download-btn" onclick="downloadApp()">
+                        <i class="fas fa-download"></i>
+                        Download APK - Latest Version
+                    </a>
+                    <div class="download-features">
+                        <div class="download-feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>100% Safe & Secure</span>
+                        </div>
+                        <div class="download-feature">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Regular Updates</span>
+                        </div>
+                        <div class="download-feature">
+                            <i class="fas fa-heart"></i>
+                            <span>Made with Love</span>
+                        </div>
+                        <div class="download-feature">
+                            <i class="fas fa-star"></i>
+                            <span>Premium Quality</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Noor Islamic App</h3>
+                    <p>A premium Islamic companion designed to help Muslims around the world practice their faith with ease, beauty, and authenticity.</p>
+                    <p style="margin-top: 20px; color: var(--accent);">
+                        <i class="fas fa-heart"></i> Made with love for the Muslim Ummah
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Features</h3>
+                    <a href="#features">Prayer Times</a><br>
+                    <a href="#features">Quran Reading</a><br>
+                    <a href="#features">Hadith Collection</a><br>
+                    <a href="#features">Digital Tasbih</a><br>
+                    <a href="#features">Daily Azkhar</a><br>
+                    <a href="#features">AI Islamic Guide</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <a href="mailto:anwarnasir0970@gmail.com">
+                        <i class="fas fa-envelope"></i> Contact Developer
+                    </a><br>
+                    <a href="#download">
+                        <i class="fas fa-download"></i> Download APK
+                    </a><br>
+                    <a href="#" onclick="showPrivacyPolicy()">
+                        <i class="fas fa-shield-alt"></i> Privacy Policy
+                    </a><br>
+                    <a href="#" onclick="showTermsOfService()">
+                        <i class="fas fa-file-contract"></i> Terms of Service
+                    </a>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <p><i class="fas fa-envelope"></i> anwarnasir0970@gmail.com</p>
+                    <p><i class="fas fa-globe"></i> www.noorapp.com (Coming Soon)</p>
+                    <p><i class="fas fa-code"></i> Developed by Noor Team</p>
+                    <p style="margin-top: 15px; font-style: italic; opacity: 0.8;">
+                        "And it is He who created the heavens and earth in truth. And the day He says, 'Be,' and it is, His word is the truth." - Quran 6:73
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Noor Islamic App. All rights reserved. | Serving the Muslim community with dedication and love.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Particles System
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = particle.style.height = Math.random() * 4 + 2 + 'px';
+                particle.style.animationDuration = Math.random() * 3 + 5 + 's';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                particles.appendChild(particle);
+            }
+        }
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            const speed = 0.15;
+            cursorX += (mouseX - cursorX) * speed;
+            cursorY += (mouseY - cursorY) * speed;
+            
+            cursor.style.left = cursorX - 10 + 'px';
+            cursor.style.top = cursorY - 10 + 'px';
+            
+            requestAnimationFrame(animateCursor);
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll Reveal Animation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 100;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('[data-count]');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const increment = target / 100;
+                let count = 0;
+                
+                const updateCounter = () => {
+                    if (count < target) {
+                        count += increment;
+                        counter.textContent = Math.floor(count).toLocaleString() + '+';
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.textContent = target.toLocaleString() + '+';
+                    }
+                };
+                
+                updateCounter();
+            });
+        }
+
+        // Enhanced Navbar Scroll Effect
+        let lastScrollY = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 100) {
+                navbar.style.background = 'rgba(0, 0, 0, 0.8)';
+                navbar.style.backdropFilter = 'blur(30px)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.1)';
+                navbar.style.backdropFilter = 'blur(20px)';
+            }
+            
+            // Hide/show navbar on scroll
+            if (currentScrollY > lastScrollY && currentScrollY > 200) {
+                navbar.style.transform = 'translateX(-50%) translateY(-100px)';
+            } else {
+                navbar.style.transform = 'translateX(-50%) translateY(0)';
+            }
+            
+            lastScrollY = currentScrollY;
+            revealOnScroll();
+        });
+
+        // Download Function
+        function downloadApp() {
+            // Create download notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 30px;
+                background: linear-gradient(135deg, var(--accent), var(--accent-light));
+                color: var(--background);
+                padding: 20px 30px;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+                z-index: 10000;
+                transform: translateX(400px);
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                font-weight: 600;
+            `;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="fas fa-download"></i>
+                    <div>
+                        <div>Download Starting...</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Noor APK - Latest Version</div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+            // Trigger actual APK download
+            const apkUrl = 'https://github.com/AnexDev1/Noor-Islamic-App/releases/download/v1.0.1/app-release.apk';
+            const link = document.createElement('a');
+            link.href = apkUrl;
+            link.download = '';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Privacy Policy Modal
+        function showPrivacyPolicy() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.8); display: flex; align-items: center;
+                justify-content: center; z-index: 10000; padding: 20px;
+                backdrop-filter: blur(10px);
+            `;
+            modal.innerHTML = `
+                <div style="background: var(--surface); padding: 40px; border-radius: 20px; max-width: 600px; max-height: 80vh; overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <h2 style="color: var(--accent); margin-bottom: 20px; font-size: 1.8rem;">🛡️ Privacy Policy</h2>
+                    <div style="line-height: 1.7; color: var(--text-secondary);">
+                        <p style="margin-bottom: 15px;">Your privacy is sacred to us, just as your faith is. This policy explains how Noor protects and handles your information:</p>
+                        <ul style="padding-left: 20px; margin-bottom: 20px;">
+                            <li style="margin-bottom: 8px;">📍 Location data is used only for accurate prayer times and Qibla direction</li>
+                            <li style="margin-bottom: 8px;">🔒 All personal data is stored securely on your device</li>
+                            <li style="margin-bottom: 8px;">🚫 We never share your information with third parties</li>
+                            <li style="margin-bottom: 8px;">💾 Reading progress and preferences are saved locally</li>
+                            <li style="margin-bottom: 8px;">🗑️ You can delete all data anytime from settings</li>
+                            <li style="margin-bottom: 8px;">🤖 AI queries are processed anonymously</li>
+                        </ul>
+                        <p style="font-style: italic; color: var(--accent);">We respect your privacy as much as we respect your faith.</p>
+                    </div>
+                    <button onclick="this.closest('div').parentElement.remove()" 
+                            style="margin-top: 25px; padding: 12px 25px; background: var(--accent); color: var(--background); border: none; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s ease;">
+                        ✨ Close
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Terms of Service Modal
+        function showTermsOfService() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.8); display: flex; align-items: center;
+                justify-content: center; z-index: 10000; padding: 20px;
+                backdrop-filter: blur(10px);
+            `;
+            modal.innerHTML = `
+                <div style="background: var(--surface); padding: 40px; border-radius: 20px; max-width: 600px; max-height: 80vh; overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <h2 style="color: var(--accent); margin-bottom: 20px; font-size: 1.8rem;">📜 Terms of Service</h2>
+                    <div style="line-height: 1.7; color: var(--text-secondary);">
+                        <p style="margin-bottom: 15px;">By using Noor, you agree to these terms crafted with Islamic principles:</p>
+                        <ul style="padding-left: 20px; margin-bottom: 20px;">
+                            <li style="margin-bottom: 8px;">🕌 Use the app to strengthen your connection with Allah</li>
+                            <li style="margin-bottom: 8px;">📚 Respect the sacred Islamic content and teachings</li>
+                            <li style="margin-bottom: 8px;">🤝 Treat the app and community with dignity</li>
+                            <li style="margin-bottom: 8px;">⚖️ We strive for accuracy but recommend consulting scholars</li>
+                            <li style="margin-bottom: 8px;">🔄 Terms may be updated to serve you better</li>
+                            <li style="margin-bottom: 8px;">❤️ The app is provided with love for the Muslim community</li>
+                        </ul>
+                        <p style="font-style: italic; color: var(--accent);">"And whoever relies upon Allah - then He is sufficient for him." - Quran 65:3</p>
+                    </div>
+                    <button onclick="this.closest('div').parentElement.remove()" 
+                            style="margin-top: 25px; padding: 12px 25px; background: var(--accent); color: var(--background); border: none; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s ease;">
+                        ✨ Close
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Enhanced Hover Effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.03)';
+                this.querySelector('.feature-icon').style.transform = 'scale(1.1) rotate(5deg)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.querySelector('.feature-icon').style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            animateCursor();
+            revealOnScroll();
+            
+            // Trigger counter animation when stats section is visible
+            const statsSection = document.querySelector('.stats-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            observer.observe(statsSection);
+        });
+
+        // Add some extra polish with typed effect for hero title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Easter egg: Konami code
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.code);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+                document.body.style.filter = 'hue-rotate(180deg)';
+                alert('🎉 SubhanAllah! You found the easter egg! 🕌');
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
