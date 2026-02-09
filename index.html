@@ -6,7 +6,7 @@
     <title>Noor - Your Premium Islamic Companion</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Sora:wght@300;400;500;600;700;800&display=swap');
         
         * {
             margin: 0;
@@ -15,28 +15,36 @@
         }
 
         :root {
-            --primary: #0F4C3A;
-            --primary-light: #1B5E4B;
-            --primary-dark: #083426;
-            --accent: #D4AF37;
-            --accent-light: #F1C232;
-            --secondary: #2D5A87;
-            --background: #0A0E1A;
-            --surface: #131827;
-            --surface-light: #1F2937;
-            --text-primary: #FFFFFF;
-            --text-secondary: #D1D5DB;
-            --text-tertiary: #9CA3AF;
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
+            --primary: #0B5A4A;
+            --primary-light: #177C65;
+            --primary-dark: #06352B;
+            --accent: #E7C76A;
+            --accent-light: #F4D88A;
+            --secondary: #215D7A;
+            --background: #070B14;
+            --surface: #0F1626;
+            --surface-light: #182235;
+            --text-primary: #F8FAFC;
+            --text-secondary: #CBD5E1;
+            --text-tertiary: #94A3B8;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(231, 199, 106, 0.25);
+            --ramadan-glow: rgba(231, 199, 106, 0.18);
+            --ramadan-ink: #0B1320;
+            --ramadan-green: #0E6B55;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Sora', sans-serif;
             background: var(--background);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        h1, h2, h3, .hero-title, .section-title {
+            font-family: 'Marcellus', serif;
+            letter-spacing: 0.5px;
         }
 
         /* Custom Scrollbar */
@@ -62,12 +70,11 @@
             height: 100%;
             z-index: -2;
             background: linear-gradient(135deg,
-                #0A0E1A 0%,      /* Lighter green */
-                #2D1B69 15%,
-                #1B5E4B 35%,
-                #0F4C3A 60%,
-                #083426 85%,
-                #1B1F3A 100%     /* Darkest green */
+                #070B14 0%,
+                #0B1320 20%,
+                #0E3B4A 45%,
+                #0E6B55 70%,
+                #0A2B33 100%
             );
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
@@ -91,7 +98,7 @@
 
         .particle {
             position: absolute;
-            background: rgba(212, 175, 55, 0.3);
+            background: rgba(231, 199, 106, 0.45);
             border-radius: 50%;
             pointer-events: none;
             animation: float 8s infinite ease-in-out;
@@ -102,6 +109,96 @@
             10% { opacity: 1; }
             90% { opacity: 1; }
             100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .ramadan-pattern {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(231, 199, 106, 0.2), transparent 35%),
+                radial-gradient(circle at 80% 15%, rgba(23, 124, 101, 0.2), transparent 40%),
+                radial-gradient(circle at 15% 80%, rgba(33, 93, 122, 0.2), transparent 35%),
+                radial-gradient(circle at 85% 75%, rgba(231, 199, 106, 0.15), transparent 40%);
+            mix-blend-mode: screen;
+        }
+
+        .ramadan-decor {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .lantern {
+            position: absolute;
+            width: 46px;
+            height: 70px;
+            background: linear-gradient(180deg, rgba(231, 199, 106, 0.9), rgba(231, 199, 106, 0.4));
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(231, 199, 106, 0.35);
+            transform-origin: top center;
+            animation: lanternSwing 6s ease-in-out infinite;
+        }
+
+        .lantern::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background: rgba(231, 199, 106, 0.7);
+            transform: translateX(-50%);
+        }
+
+        .lantern::after {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 1px solid rgba(11, 19, 32, 0.6);
+            border-radius: 8px;
+        }
+
+        .lantern.l1 { top: 60px; left: 8%; animation-delay: 0s; }
+        .lantern.l2 { top: 30px; left: 48%; animation-delay: 1.2s; }
+        .lantern.l3 { top: 70px; right: 10%; animation-delay: 2.4s; }
+
+        .crescent {
+            position: absolute;
+            right: 8%;
+            top: 180px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            box-shadow: -20px 0 0 0 rgba(231, 199, 106, 0.85);
+            filter: drop-shadow(0 0 20px rgba(231, 199, 106, 0.3));
+        }
+
+        .star {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(231, 199, 106, 0.9);
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(231, 199, 106, 0.7);
+            animation: starPulse 4s ease-in-out infinite;
+        }
+
+        .star.s1 { top: 180px; left: 15%; animation-delay: 0s; }
+        .star.s2 { top: 240px; left: 30%; animation-delay: 1s; }
+        .star.s3 { top: 120px; right: 25%; animation-delay: 2s; }
+        .star.s4 { top: 260px; right: 35%; animation-delay: 3s; }
+
+        @keyframes lanternSwing {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        @keyframes starPulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
         }
 
         /* Navigation */
@@ -263,6 +360,88 @@
             margin-bottom: 40px;
             line-height: 1.7;
             max-width: 90%;
+        }
+
+        .ramadan-panel {
+            background: linear-gradient(160deg, rgba(11, 19, 32, 0.85), rgba(14, 107, 85, 0.7));
+            border: 1px solid rgba(231, 199, 106, 0.4);
+            box-shadow: 0 20px 60px rgba(7, 11, 20, 0.55), inset 0 0 30px rgba(231, 199, 106, 0.08);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 34px;
+            position: relative;
+            overflow: hidden;
+            animation: panelGlow 6s ease-in-out infinite;
+        }
+
+        .ramadan-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(231, 199, 106, 0.25), transparent 55%);
+            pointer-events: none;
+        }
+
+        .ramadan-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .ramadan-title {
+            font-family: 'Marcellus', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            letter-spacing: 0.6px;
+        }
+
+        .ramadan-dates {
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            text-align: right;
+        }
+
+        .ramadan-timer {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .time-card {
+            background: rgba(15, 22, 38, 0.8);
+            border: 1px solid rgba(231, 199, 106, 0.25);
+            border-radius: 16px;
+            padding: 14px 10px;
+            text-align: center;
+            box-shadow: inset 0 0 15px rgba(231, 199, 106, 0.08);
+        }
+
+        .time-value {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .time-label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-tertiary);
+        }
+
+        .ramadan-status {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        @keyframes panelGlow {
+            0%, 100% { box-shadow: 0 20px 60px rgba(7, 11, 20, 0.55), inset 0 0 30px rgba(231, 199, 106, 0.08); }
+            50% { box-shadow: 0 25px 70px rgba(7, 11, 20, 0.65), inset 0 0 40px rgba(231, 199, 106, 0.15); }
         }
 
         .cta-group {
@@ -798,6 +977,13 @@
             .hero-visual img {
                 width: 350px !important;
             }
+            .ramadan-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .ramadan-dates {
+                text-align: center;
+            }
         }
 
         @media (max-width: 768px) {
@@ -824,6 +1010,12 @@
             .download-container {
                 margin: 0 20px;
                 padding: 40px 30px;
+            }
+            .ramadan-timer {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .lantern, .crescent, .star {
+                display: none;
             }
         }
 
@@ -855,9 +1047,24 @@
 <body>
     <!-- Animated Background -->
     <div class="animated-bg"></div>
+
+    <!-- Ramadan Pattern Overlay -->
+    <div class="ramadan-pattern"></div>
     
     <!-- Floating Particles -->
     <div class="particles" id="particles"></div>
+
+    <!-- Ramadan Decorations -->
+    <div class="ramadan-decor">
+        <div class="lantern l1"></div>
+        <div class="lantern l2"></div>
+        <div class="lantern l3"></div>
+        <div class="crescent"></div>
+        <div class="star s1"></div>
+        <div class="star s2"></div>
+        <div class="star s3"></div>
+        <div class="star s4"></div>
+    </div>
     
     <!-- Custom Cursor -->
     <div class="cursor-effect" id="cursor"></div>
@@ -892,6 +1099,31 @@
                     <p class="hero-subtitle">
                         Experience the most beautiful and comprehensive Islamic app ever created. With AI-powered guidance, stunning visuals, and authentic Islamic content - Noor brings spirituality to the digital age.
                     </p>
+                    <div class="ramadan-panel reveal" id="ramadan">
+                        <div class="ramadan-header">
+                            <div class="ramadan-title" id="ramadan-title">Ramadan Countdown</div>
+                            <div class="ramadan-dates" id="ramadan-dates">Loading dates...</div>
+                        </div>
+                        <div class="ramadan-timer" id="ramadan-timer">
+                            <div class="time-card">
+                                <span class="time-value" id="ramadan-days">--</span>
+                                <span class="time-label">Days</span>
+                            </div>
+                            <div class="time-card">
+                                <span class="time-value" id="ramadan-hours">--</span>
+                                <span class="time-label">Hours</span>
+                            </div>
+                            <div class="time-card">
+                                <span class="time-value" id="ramadan-minutes">--</span>
+                                <span class="time-label">Minutes</span>
+                            </div>
+                            <div class="time-card">
+                                <span class="time-value" id="ramadan-seconds">--</span>
+                                <span class="time-label">Seconds</span>
+                            </div>
+                        </div>
+                        <div class="ramadan-status" id="ramadan-status">Preparing Ramadan timing...</div>
+                    </div>
                     <div class="cta-group">
                         <a href="#download" class="btn btn-primary">
                             <i class="fas fa-download"></i>
@@ -1159,6 +1391,94 @@
             requestAnimationFrame(animateCursor);
         }
 
+        const ramadanConfig = {
+            startDate: new Date(2026, 1, 17, 0, 0, 0),
+            durationDays: 30
+        };
+
+        function formatDate(date, calendar) {
+            try {
+                return new Intl.DateTimeFormat('en-US', {
+                    dateStyle: 'medium',
+                    calendar: calendar
+                }).format(date);
+            } catch (error) {
+                return new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(date);
+            }
+        }
+
+        function updateRamadanCountdown() {
+            const now = new Date();
+            const start = ramadanConfig.startDate;
+            const end = new Date(start);
+            end.setDate(start.getDate() + ramadanConfig.durationDays);
+
+            const titleEl = document.getElementById('ramadan-title');
+            const datesEl = document.getElementById('ramadan-dates');
+            const statusEl = document.getElementById('ramadan-status');
+            const dayEl = document.getElementById('ramadan-days');
+            const hourEl = document.getElementById('ramadan-hours');
+            const minuteEl = document.getElementById('ramadan-minutes');
+            const secondEl = document.getElementById('ramadan-seconds');
+
+            if (!titleEl || !datesEl || !statusEl || !dayEl || !hourEl || !minuteEl || !secondEl) {
+                return;
+            }
+
+            const gregStart = formatDate(start);
+            const gregEnd = formatDate(end);
+            const ethiStart = formatDate(start, 'ethiopic');
+            const ethiEnd = formatDate(end, 'ethiopic');
+            datesEl.textContent = `Start: ${gregStart} | End: ${gregEnd} | Ethiopic: ${ethiStart} - ${ethiEnd}`;
+
+            let target = start;
+            let mode = 'countdown';
+
+            if (now >= start && now < end) {
+                target = end;
+                mode = 'active';
+            } else if (now >= end) {
+                mode = 'complete';
+            }
+
+            if (mode === 'complete') {
+                titleEl.textContent = 'Ramadan Complete';
+                statusEl.textContent = 'Ramadan has ended. We will be ready for the next blessed month.';
+                dayEl.textContent = '00';
+                hourEl.textContent = '00';
+                minuteEl.textContent = '00';
+                secondEl.textContent = '00';
+                return;
+            }
+
+            if (mode === 'active') {
+                const dayNumber = Math.floor((now - start) / (1000 * 60 * 60 * 24)) + 1;
+                const remainingDays = Math.max(ramadanConfig.durationDays - dayNumber, 0);
+                titleEl.textContent = 'Ramadan Day Counter';
+                statusEl.textContent = `Day ${dayNumber} of ${ramadanConfig.durationDays}. ${remainingDays} days remaining.`;
+            } else {
+                titleEl.textContent = 'Ramadan Countdown';
+                statusEl.textContent = 'Counting down to the first night of Ramadan.';
+            }
+
+            const timeLeft = Math.max(target - now, 0);
+            const totalSeconds = Math.floor(timeLeft / 1000);
+            const days = Math.floor(totalSeconds / 86400);
+            const hours = Math.floor((totalSeconds % 86400) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            dayEl.textContent = String(days).padStart(2, '0');
+            hourEl.textContent = String(hours).padStart(2, '0');
+            minuteEl.textContent = String(minutes).padStart(2, '0');
+            secondEl.textContent = String(seconds).padStart(2, '0');
+        }
+
+        function startRamadanCountdown() {
+            updateRamadanCountdown();
+            setInterval(updateRamadanCountdown, 1000);
+        }
+
         // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1272,7 +1592,7 @@
                 setTimeout(() => notification.remove(), 500);
             }, 3000);
             // Trigger actual APK download
-            const apkUrl = 'https://github.com/AnexDev1/Noor-Islamic-App/releases/download/v1.0.1/app-release.apk';
+            const apkUrl = 'https://github.com/AnexDev1/Noor-Islamic-App/releases/download/v1.2.4/app-release.apk';
             const link = document.createElement('a');
             link.href = apkUrl;
             link.download = '';
@@ -1365,6 +1685,7 @@
             createParticles();
             animateCursor();
             revealOnScroll();
+            startRamadanCountdown();
             
             // Trigger counter animation when stats section is visible
             const statsSection = document.querySelector('.stats-section');
